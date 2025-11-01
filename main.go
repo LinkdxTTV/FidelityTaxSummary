@@ -60,7 +60,7 @@ func main() {
 		transaction, err := parseRecordToTranscation(record)
 		if err != nil {
 			// Errors are expected as many lines that are not transactions wont parse
-			fmt.Println("did not parse record:", record)
+			fmt.Println("did not parse line:", record)
 			continue
 		} else {
 			AllTransactions = append(AllTransactions, transaction)
@@ -92,8 +92,6 @@ func main() {
 	for range 4 {
 		Quarters = append(Quarters, Quarter{Transactions: []Transaction{}})
 	}
-
-	fmt.Println(len(Quarters))
 
 	// Print out information
 	fmt.Println("============ ALL TRANSACTIONS SORTED BY SALE DATE, SPLIT BY QUARTER ============\n")
