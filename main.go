@@ -99,6 +99,8 @@ func main() {
 		Quarters[determineQuarterFromDate(t.DateSold)].Transactions = append(Quarters[determineQuarterFromDate(t.DateSold)].Transactions, t)
 	}
 
+	var YTDShort float64
+	var YTDLong float64
 	for i, q := range Quarters {
 		var quarterShortTermNet float64
 		var quarterLongTermNet float64
@@ -106,9 +108,12 @@ func main() {
 			fmt.Printf("Sold %.1f shares of %s on %s for a %s \n", t.Quantity, t.Symbol, t.DateSold.Format("01/02/2006"), gainPhrase(t))
 			quarterShortTermNet += t.ShortTermNet
 			quarterLongTermNet += t.LongTermNet
+			YTDShort += t.ShortTermNet
+			YTDLong += t.LongTermNet
 		}
 		fmt.Println(fmt.Sprintf("============ End of Quarter %d || Short Term Net: %.2f, Long Term Net: %.2f \n", i+1, quarterShortTermNet, quarterLongTermNet))
 	}
+	fmt.Println(fmt.Sprintf("============ Year To Date Summary|| Short Term Net: %.2f, Long Term Net: %.2f, Total %.2f \n", YTDShort, YTDLong, YTDLong+YTDShort))
 }
 
 func gainPhrase(t Transaction) string {
